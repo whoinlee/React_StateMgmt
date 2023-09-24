@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import AppUseReducer from './App.jsx';
+import AppUseReducer from './AppUseReducer.jsx';
 // import App from './App.jsx';
 // import App from './App.jsx';
 // import App from './App.jsx';
