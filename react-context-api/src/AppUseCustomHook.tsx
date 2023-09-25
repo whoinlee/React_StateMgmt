@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import './App.css';
 
 interface Pokemon {
@@ -12,7 +12,6 @@ interface Pokemon {
   "special_defense": number;
   "speed": number;
 }
-
 function usePokemon ():{ pokemon: Pokemon[]} 
 {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
@@ -27,23 +26,26 @@ function usePokemon ():{ pokemon: Pokemon[]}
   return { pokemon };
 }
 
-const PokemonList = ({ pokemon }:{ pokemon: Pokemon[] }) => {
+const PokemonContext = createContext({ pokemon: [] as Pokemon[] });
+
+const PokemonList = () => {
+  const pokemonContext = useContext(PokemonContext);
+
   return (
     <div>
-      {pokemon.map(p => <div key={p.id}>{p.name}</div>)}
+      {pokemonContext.pokemon.map(p => <div key={p.id}>{p.name}</div>)}
     </div>
   )
 }
 
 const AppUseCustomHook = () => {
-  const { pokemon } = usePokemon();
+  // const { pokemon } = usePokemon();
 
   return (
     <>
-      {/* <div>
-        {JSON.stringify(pokemon)}
-      </div> */}
-      <PokemonList pokemon={pokemon} />
+      <PokemonContext.Provider value={ usePokemon()}>
+        <PokemonList />
+      </PokemonContext.Provider>
     </>
   )
 }
