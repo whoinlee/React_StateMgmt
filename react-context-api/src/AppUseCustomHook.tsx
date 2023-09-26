@@ -20,7 +20,6 @@ function usePokemon ():{ pokemon: Pokemon[]}
     fetch('/pokemon.json')
     .then(response => response.json())
     .then(data => setPokemon(data))
-    
   }, []);
 
   return { pokemon };
@@ -39,11 +38,9 @@ const PokemonList = () => {
 }
 
 const AppUseCustomHook = () => {
-  // const { pokemon } = usePokemon();
-
   return (
     <>
-      <PokemonContext.Provider value={ usePokemon()}>
+      <PokemonContext.Provider value={usePokemon()}>
         <PokemonList />
       </PokemonContext.Provider>
     </>
