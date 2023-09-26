@@ -13,7 +13,9 @@ interface Pokemon {
   "speed": number;
 }
 
-const PokemonContext = createContext({ pokemon: [] as Pokemon[] });
+// const PokemonContext = createContext<ReturnType<typeof usePokemonSource> | undefined>({ pokemon: [] as Pokemon[] });
+// const PokemonContext = createContext<ReturnType<typeof usePokemonSource> | undefined>(undefined); //-- causes issue in PokemonList
+const PokemonContext = createContext<ReturnType<typeof usePokemonSource>>({} as unknown as ReturnType<typeof usePokemonSource>); 
 function usePokemonContext() 
 {
   return useContext(PokemonContext);
