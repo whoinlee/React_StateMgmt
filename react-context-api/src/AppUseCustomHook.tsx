@@ -1,4 +1,4 @@
-import { usePokemonContext, usePokemonSource, PokemonContext} from './store';
+import { usePokemonContext, PokemonProvider} from './store';
 import './App.css';
 
 
@@ -14,11 +14,9 @@ const PokemonList = () => {
 
 const AppUseCustomHook = () => {
   return (
-    <>
-      <PokemonContext.Provider value={usePokemonSource()}>
+      <PokemonProvider>
         <PokemonList />
-      </PokemonContext.Provider>
-    </>
+      </PokemonProvider>
   )
 }
 

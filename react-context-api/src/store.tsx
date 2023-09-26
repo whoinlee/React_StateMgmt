@@ -12,7 +12,7 @@ interface Pokemon {
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function usePokemonSource ():{ pokemon: Pokemon[]} 
+function usePokemonSource ():{ pokemon: Pokemon[]} 
 {
     const [pokemon, setPokemon] = useState<Pokemon[]>([]);
 
@@ -25,10 +25,19 @@ export function usePokemonSource ():{ pokemon: Pokemon[]}
     return { pokemon };
 }
 
-export const PokemonContext = createContext<ReturnType<typeof usePokemonSource>>({} as unknown as ReturnType<typeof usePokemonSource>); 
+const PokemonContext = createContext<ReturnType<typeof usePokemonSource>>({} as unknown as ReturnType<typeof usePokemonSource>); 
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function usePokemonContext() 
 {
     return useContext(PokemonContext);
+}
+
+export function PokemonProvider({children}:{children: React.ReactNode}) 
+{
+    return (
+        <PokemonContext.Provider value={usePokemonSource()}>
+            {children}
+        </PokemonContext.Provider>
+    )
 }
